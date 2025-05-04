@@ -1,4 +1,4 @@
-import graph from "graphology";
+import Graph from "graphology";
 import Sigma from "sigma";
 
 const hash = window.location.hash;
