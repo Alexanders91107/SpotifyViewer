@@ -19,7 +19,7 @@ body{
 }
 
 .navbar-container {
-  width: 95vw;
+  width: 100vw;
   height: 60px;
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,7 @@ body{
   background-color: #1a1a1a;
   border-radius: 8px;
   margin: 10px;
-  box-shadow: 10px 10px 10px rgba(0, 200, 0, 0.4);
+  box-shadow: 0 0 10px rgba(0, 200, 0, 0.4);
 
 }
 
