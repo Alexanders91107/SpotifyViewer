@@ -4,10 +4,59 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Graphology Frontend Demo</title>
+    <title>Spotify Viewer</title> <!-- Changed title -->
+    <!-- You might want to add a CSS file later -->
+    <!-- <link rel="stylesheet" href="/src/style.css"> -->
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h1>Spotify Profile Viewer</h1>
+
+      <section id="profile-section">
+        <h2>Profile</h2>
+        <img id="profileImage" src="" alt="Profile Picture" width="100">
+        <p>Name: <span id="displayName">Loading...</span></p>
+        <p>Followers: <span id="followerCount">Loading...</span></p>
+      </section>
+
+      <section id="tracks-section">
+        <h2>Top Tracks</h2>
+
+        <div>
+          <h3>Short Term (Last 4 Weeks)</h3>
+          <div id="short_term_stats">
+             <!-- Averages will go here -->
+          </div>
+          <ul id="short_term_tracks_list">
+            <!-- Track list items will go here -->
+            <li>Loading...</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Medium Term (Last 6 Months)</h3>
+           <div id="medium_term_stats">
+             <!-- Averages will go here -->
+          </div>
+          <ul id="medium_term_tracks_list">
+             <!-- Track list items will go here -->
+             <li>Loading...</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Long Term (All Time)</h3>
+           <div id="long_term_stats">
+             <!-- Averages will go here -->
+          </div>
+          <ul id="long_term_tracks_list">
+             <!-- Track list items will go here -->
+             <li>Loading...</li>
+          </ul>
+        </div>
+      </section>
+
+    </div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

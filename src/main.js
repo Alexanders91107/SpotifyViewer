@@ -38,20 +38,56 @@ async function reAuth(){
 
 async function mainCode(profile) {
   console.log("main: ", profile);
+  displayProfile(profile); // Call function to update profile section in HTML
 
-  let container = document.getElementById("sigma-container");
+  // Fetch top tracks for different time ranges
+  const topTracksShort = await fetchTopTracks(localStorage.getItem('spotify_token'), 'short_term');
+  const topTracksMedium = await fetchTopTracks(localStorage.getItem('spotify_token'), 'medium_term');
+  const topTracksLong = await fetchTopTracks(localStorage.getItem('spotify_token'), 'long_term');
 
-  if (!container) {
-    container = document.createElement("div");
-    container.id = "sigma-container";
-    container.style.width = "100%";
-    container.style.height = "95vh";
-    container.style.background = "red";
-    document.body.appendChild(container);
-  }
+  displayTopTracks('short_term', topTracksShort); // Call function to display short term tracks
+  displayTopTracks('medium_term', topTracksMedium); // Call function to display medium term tracks
+  displayTopTracks('long_term', topTracksLong); // Call function to display long term tracks
+
+}
+
+function displayProfile(profile) {
+  console.log("Displaying profile:", profile);
+  // TODO: Update HTML elements with profile.display_name, profile.images[0]?.url, profile.followers.total
+  // Example: document.getElementById('displayName').textContent = profile.display_name;
+  // Example: document.getElementById('profileImage').src = profile.images[0]?.url || 'default-placeholder.png';
+  // Example: document.getElementById('followerCount').textContent = profile.followers.total;
+}
+
+function displayTopTracks(term, tracks) {
+  console.log(`Displaying ${term} tracks:`, tracks);
+  // TODO: Update HTML elements for the specific term (e.g., 'short_term_tracks_list')
+  // Loop through tracks.items and create list items or table rows
 }
 
 //Spotifty API functions
+
+async function fetchTopTracks(token, timeRange) {
+  // timeRange can be 'short_term', 'medium_term', or 'long_term'
+  const limit = 50;
+  try {
+    // Construct the URL for fetching top tracks
+    const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`, {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!result.ok) {
+      console.error(`Error fetching top tracks (${timeRange}): ${result.status} ${result.statusText}`);
+      const errorBody = await result.text();
+      console.error("Spotify API response body:", errorBody);
+      return { error: { status: result.status, message: `Error fetching top tracks (${timeRange})` } };
+    }
+    return await result.json(); // Returns object like { items: [...] }
+  } catch (err) {
+    console.error(`Network error fetching top tracks (${timeRange}):`, err);
+    return { error: { status: 0, message: `Network error fetching top tracks (${timeRange})` } };
+  }
+}
 
 export async function redirectToAuthCodeFlow(clientId) {
   const verifier = generateCodeVerifier(128);
