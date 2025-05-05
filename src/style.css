@@ -16,11 +16,6 @@
 body{
   height: 100%;
   padding: 10px;
-}
-
-.app{
-  width: 99vw;
-  height: 99vh;
   background: linear-gradient(45deg, #0b3d0b, #111111);
 }
 
