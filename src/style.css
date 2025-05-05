@@ -43,7 +43,7 @@ body{
 
 .content-container {
   height: calc(95vh - 60px);
-  margin-top: 15px;
+  margin-top: 5px;
   /* justify-items: flex; */ /* Remove this, it's for Grid */
   display: flex; /* Make this a flex container */
   flex-wrap: wrap; /* Allow items to wrap to the next line */
@@ -56,10 +56,10 @@ body{
 .content-subcontainer {
   display: flex;
   flex-direction: column;
-  top: 5px;
+  margin-top: 10px;
   /* align-items: center; */ /* Let content align naturally or set specific alignment */
   /* justify-content: center; */ /* Let content flow naturally */
-  height:  95%; /* Remove fixed height, let content determine height */
+  height:  100%; /* Remove fixed height, let content determine height */
   width: 360px; /* Keep fixed width for wrapping behavior */
   min-height: 200px; /* Optional: Set a minimum height */
   padding: 20px;
