@@ -16,16 +16,11 @@ if (window.location.pathname === '/index') {
 
 //for main page -----------------------------------
 if (window.location.pathname === '/main') {
-  console.log("Main page URL:", window.location.href);
-  console.log("Hash:", window.location.hash);
-  const hash = window.location.hash;
-  const params = new URLSearchParams(hash.substring(1));
-  const token = params.get('access_token');
-  
-  if (token) {
-    localStorage.setItem('spotify_token', token); // Store the token for later use
-    getProfileMain(token);
-  } else console.error('Main: No token found in URL');
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+
+  if (code) getProfileMain(code);
+  else console.error('Main: No code found in URL');
 }
 //for main page -----------------------------------
 
@@ -39,9 +34,10 @@ if (window.location.pathname === '/main') {
 
 //Async functions to handle top level await
 
-async function getProfileMain(token) {
-  const profile = await fetchProfile(token);
-  console.log("main: " + profile); // Profile data logs to console
+async function getProfileMain(code) {
+  const accessToken = await getAccessToken(clientId, code);
+  const profile = await fetchProfile(accessToken);
+  console.log("main: ", profile);
 }
 
 async function getProfileIndex(code) {
