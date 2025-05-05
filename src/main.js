@@ -18,18 +18,24 @@ async function mainHandler() {
   const savedToken = localStorage.getItem('spotify_token');
   if(savedToken){
     const profile = await fetchProfile(savedToken);
-    mainCode(profile);
+    if(profile.error) reAuth();
+    else mainCode(profile);
   }
+  else reAuth();
+}
+
+async function reAuth(){
+  const savedToken = localStorage.getItem('spotify_token');
+  if(savedToken) localStorage.removeItem('spotify_token');
+
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (!code) redirectToAuthCodeFlow(clientId);
   else{
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code');
-    if (!code) redirectToAuthCodeFlow(clientId);
-    else{
-      const accessToken = await getAccessToken(clientId, code);
-      localStorage.setItem("spotify_token", accessToken); // Store the access token for later use
-      const profile = await fetchProfile(accessToken);
-      mainCode(profile);
-    }
+    const accessToken = await getAccessToken(clientId, code);
+    localStorage.setItem("spotify_token", accessToken); // Store the access token for later use
+    const profile = await fetchProfile(accessToken);
+    mainCode(profile);
   }
 }
 
