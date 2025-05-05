@@ -28,7 +28,6 @@ body{
   background-color: #1b2e1b;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(13, 117, 13, 0.3);
-
 }
 
 .navbar-title-container {
@@ -39,4 +38,10 @@ body{
   font-size: 1.5rem;
   font-weight: 500;
   color: #ffffff;
+}
+
+.content-container {
+  background-color: #1b2e1b;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(13, 117, 13, 0.3);
 }
