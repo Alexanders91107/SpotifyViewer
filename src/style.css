@@ -16,7 +16,9 @@
 body{
   height: 98vh;
   padding: 10px;
-  background: linear-gradient(45deg, #0b3d0b, #111111);
+  background: linear-gradient(45deg, #051305, #111111);
+  border-radius: 8px;
+  box-shadow: 0 0 100px rgba(4, 22, 4, 0.4);
 }
 
 .navbar-container {
