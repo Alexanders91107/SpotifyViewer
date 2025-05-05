@@ -1,5 +1,8 @@
+//main code ---------------------------------------------------
+
 const clientId = "77456fd240024ae29f080233a70335b0"; // Replace with your client ID
 
+//for load up and spotify auth --------------------
 if (window.location.pathname === '/') {
   window.history.replaceState(null, '', '/index');
 }
@@ -9,8 +12,12 @@ if (window.location.pathname === '/index') {
   if (!code) redirectToAuthCodeFlow(clientId);
   else getProfileIndex(code);
 }
+//for load up and spotify auth --------------------
 
+//for main page -----------------------------------
 if (window.location.pathname === '/main') {
+  console.log("Main page URL:", window.location.href);
+  console.log("Hash:", window.location.hash);
   const hash = window.location.hash;
   const params = new URLSearchParams(hash.substring(1));
   const token = params.get('access_token');
@@ -20,6 +27,17 @@ if (window.location.pathname === '/main') {
     getProfileMain(token);
   } else console.error('Main: No token found in URL');
 }
+//for main page -----------------------------------
+
+//end main code ------------------------------------------------
+
+
+//functions ---------------------------------------------------
+//-------------------------------------------------------------
+
+
+
+//Async functions to handle top level await
 
 async function getProfileMain(token) {
   const profile = await fetchProfile(token);
@@ -31,6 +49,10 @@ async function getProfileIndex(code) {
     const profile = await fetchProfile(accessToken);
     console.log("index: " + profile); // Profile data logs to console
 }
+
+
+
+//Spotifty API functions
 
 export async function redirectToAuthCodeFlow(clientId) {
   const verifier = generateCodeVerifier(128);
