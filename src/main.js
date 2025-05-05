@@ -1,51 +1,33 @@
 //main code ---------------------------------------------------
 
-const clientId = "77456fd240024ae29f080233a70335b0"; // Replace with your client ID
-
+const clientId = "77456fd240024ae29f080233a70335b0";
 //for load up and spotify auth --------------------
 if (window.location.pathname === '/') window.history.replaceState(null, '', '/index');
-
-if (window.location.pathname === '/index') {
-  const code = undefined;
-  if (!code) redirectToAuthCodeFlow(clientId);
-  else index(code);
-}
-//for load up and spotify auth --------------------
-
+if (window.location.pathname === '/index') redirectToAuthCodeFlow(clientId);
 //for main page -----------------------------------
-if (window.location.pathname === '/main') {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code');
-
-  if (code){
-    localStorage.setItem('spotify_code', code);
-    console.log("Code received: ", code);
-    main(code);
-  }
-  else{
-    const savedCode = localStorage.getItem('spotify_code');
-    if(savedCode) main(savedCode);
-    else{
-      console.log("No code found, redirecting to auth flow.");
-    }
-  }
-}
-//for main page -----------------------------------
-
-//end main code ------------------------------------------------
+if (window.location.pathname === '/main') main();
 
 
 //functions ---------------------------------------------------
 //-------------------------------------------------------------
 
-
-
 //Async functions to handle top level await
 
-async function main(code) {
-  const accessToken = await getAccessToken(clientId, code);
-  const profile = await fetchProfile(accessToken);
-  console.log("main: ", profile);
+async function main() {
+  const savedToken = localStorage.getItem('spotify_token');
+  if(savedToken){
+    const profile = await fetchProfile(accessToken);
+    console.log("main: ", profile);
+  }
+  else{
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
+    if (!code) redirectToAuthCodeFlow(clientId);
+    else{
+      const accessToken = await getAccessToken(clientId, code);
+      localStorage.setItem("spotify_token", accessToken); // Store the access token for later use
+    }
+  }
 }
 
 async function index(code) {
