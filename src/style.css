@@ -26,11 +26,13 @@ body{
   padding: 1rem;
   background-color: #222222;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(6, 44, 6, 0.3);
+  box-shadow: 0 0 10px rgba(13, 117, 13, 0.3);
 
 }
 
 .navbar-title-container {
+  margin-top: 5px;
+  margin-bottom: 5px;
   display: flex;
   align-items: left;
   font-size: 1.5rem;
