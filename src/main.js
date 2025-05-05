@@ -15,7 +15,8 @@ async function mainHandler() {
   const savedToken = localStorage.getItem('spotify_token');
   if(savedToken){
     const profile = await fetchProfile(savedToken);
-    if(profile.error) reAuth();
+    const topTracksShort = await fetchTopTracks(localStorage.getItem('spotify_token'), 'short_term');
+    if(profile.error || topTracksShort.error) reAuth();
     else mainCode(profile);
   }
   else reAuth();
