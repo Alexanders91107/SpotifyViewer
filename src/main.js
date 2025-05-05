@@ -16,7 +16,7 @@ if (window.location.pathname === '/main') main();
 async function main() {
   const savedToken = localStorage.getItem('spotify_token');
   if(savedToken){
-    const profile = await fetchProfile(accessToken);
+    const profile = await fetchProfile(savedToken);
     console.log("main: ", profile);
   }
   else{
