@@ -41,6 +41,7 @@ body{
 }
 
 .content-container {
+  height: calc(95vh - 60px);
   background-color: #1b2e1b;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(13, 117, 13, 0.3);
