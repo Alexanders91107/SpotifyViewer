@@ -45,7 +45,7 @@ async function mainCode(profile) {
     container = document.createElement("div");
     container.id = "sigma-container";
     container.style.width = "100%";
-    container.style.height = "100vh";
+    container.style.height = "95vh";
     container.style.background = "red";
     document.body.appendChild(container);
   }
