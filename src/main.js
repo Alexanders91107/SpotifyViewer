@@ -120,9 +120,28 @@ export async function getAccessToken(clientId, code) {
 }
 
 async function fetchProfile(token) {
-  const result = await fetch("https://api.spotify.com/v1/me", {
-      method: "GET", headers: { Authorization: `Bearer ${token}` }
-  });
+  try {
+    const result = await fetch("https://api.spotify.com/v1/me", {
+        method: "GET", headers: { Authorization: `Bearer ${token}` }
+    });
 
-  return await result.json();
+    // Check if the response was successful (status code 200-299)
+    if (!result.ok) {
+      // Log the error status and try to read the response body as text for debugging
+      console.error(`Error fetching profile: ${result.status} ${result.statusText}`);
+      const errorBody = await result.text(); // Read the raw response body
+      console.error("Spotify API response body (non-JSON):", errorBody);
+      // Return an error object that your mainHandler can check
+      // This mimics the structure of other Spotify API errors
+      return { error: { status: result.status, message: `Spotify API Error: ${result.statusText}. Response: ${errorBody.substring(0, 100)}...` } };
+    }
+
+    // If the response is OK, *then* parse it as JSON
+    return await result.json();
+
+  } catch (err) {
+    // Catch network errors or other unexpected issues
+    console.error("Network error during fetchProfile:", err);
+    return { error: { status: 0, message: "Network error fetching profile." } };
+  }
 }
