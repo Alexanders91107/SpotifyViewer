@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #1d1d1d;
+  background-color: #111111;
 
   box-sizing: border-box;
 }
@@ -24,9 +24,9 @@ body{
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #1a1a1a;
+  background-color: #222222;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(5, 34, 5, 0.2);
+  box-shadow: 0 0 10px rgba(6, 44, 6, 0.3);
 
 }
 
