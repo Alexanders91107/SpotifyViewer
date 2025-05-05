@@ -59,9 +59,13 @@ body{
   margin-top: 10px;
   /* align-items: center; */ /* Let content align naturally or set specific alignment */
   /* justify-content: center; */ /* Let content flow naturally */
-  height:  100%; /* Remove fixed height, let content determine height */
-  width: 360px; /* Keep fixed width for wrapping behavior */
-  min-height: 200px; /* Optional: Set a minimum height */
+
+  /* Flexbox properties for growth and minimum size */
+  flex-grow: 1; /* Allow the item to grow to fill available space */
+  flex-basis: 360px; /* Set the initial/minimum size before growing */
+  /* width: 360px; */ /* Remove fixed width */
+
+  height: 100%; /* Optional: Keep a minimum height */
   padding: 20px;
   background-color: #1b2e1b;
   border-radius: 8px;
