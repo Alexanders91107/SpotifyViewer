@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(45deg, #0a270a, #111111);
+  background: linear-gradient(45deg, #081d08, #111111);
   box-sizing: border-box;
 }
 
@@ -25,7 +25,7 @@ body{
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #223a22;
+  background-color: #1b2e1b;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(13, 117, 13, 0.3);
 
