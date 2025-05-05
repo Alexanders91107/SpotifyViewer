@@ -16,7 +16,9 @@ if (window.location.pathname === '/main') mainHandler();
 
 async function mainHandler() {
   const savedToken = localStorage.getItem('spotify_token');
-  if(savedToken) mainCode(savedToken);
+  if(savedToken){
+    const profile = await fetchProfile(savedToken);
+  }
   else{
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
@@ -24,13 +26,13 @@ async function mainHandler() {
     else{
       const accessToken = await getAccessToken(clientId, code);
       localStorage.setItem("spotify_token", accessToken); // Store the access token for later use
-      mainCode(accessToken);
+      const profile = await fetchProfile(accessToken);
     }
   }
+  mainCode(profile);
 }
 
-async function mainCode(token) {
-  const profile = await fetchProfile(token);
+async function mainCode(profile) {
   console.log("main: ", profile);
 
   let container = document.getElementById("sigma-container");
