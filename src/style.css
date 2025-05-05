@@ -44,6 +44,16 @@ body{
 .content-container {
   height: calc(95vh - 60px);
   margin-top: 15px;
+  justify-items: flex;
+}
+
+.content-subcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
   background-color: #1b2e1b;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(13, 117, 13, 0.3);
