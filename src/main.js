@@ -40,12 +40,12 @@ async function mainCode(profile) {
   console.log("main: ", profile);
 
   let container = document.getElementById("sigma-container");
-  
+
   if (!container) {
     container = document.createElement("div");
     container.id = "sigma-container";
     container.style.width = "100%";
-    container.style.height = "100vh";
+    container.style.height = "100%";
     container.style.background = "red";
     document.body.appendChild(container);
   }
