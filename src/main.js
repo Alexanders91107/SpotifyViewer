@@ -5,7 +5,7 @@ const clientId = "77456fd240024ae29f080233a70335b0";
 if (window.location.pathname === '/') window.history.replaceState(null, '', '/index');
 if (window.location.pathname === '/index') redirectToAuthCodeFlow(clientId);
 //for main page -----------------------------------
-if (window.location.pathname === '/main') main();
+if (window.location.pathname === '/main') mainHandler();
 
 
 //functions ---------------------------------------------------
@@ -13,12 +13,9 @@ if (window.location.pathname === '/main') main();
 
 //Async functions to handle top level await
 
-async function main() {
+async function mainHandler() {
   const savedToken = localStorage.getItem('spotify_token');
-  if(savedToken){
-    const profile = await fetchProfile(savedToken);
-    console.log("main: ", profile);
-  }
+  if(savedToken) mainCode(savedToken);
   else{
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code');
@@ -26,17 +23,15 @@ async function main() {
     else{
       const accessToken = await getAccessToken(clientId, code);
       localStorage.setItem("spotify_token", accessToken); // Store the access token for later use
+      mainCode(accessToken);
     }
   }
 }
 
-async function index(code) {
-    const accessToken = await getAccessToken(clientId, code);
-    const profile = await fetchProfile(accessToken);
-    console.log("index: " + profile); // Profile data logs to console
+async function mainCode(token) {
+  const profile = await fetchProfile(token);
+  console.log("main: ", profile);
 }
-
-
 
 //Spotifty API functions
 
