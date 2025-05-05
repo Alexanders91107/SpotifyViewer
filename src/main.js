@@ -1,6 +1,3 @@
-import Graph from "graphology";
-import Sigma from "sigma";
-
 //main code ---------------------------------------------------
 
 const clientId = "77456fd240024ae29f080233a70335b0";
@@ -43,22 +40,15 @@ async function mainCode(profile) {
   console.log("main: ", profile);
 
   let container = document.getElementById("sigma-container");
+  
   if (!container) {
     container = document.createElement("div");
     container.id = "sigma-container";
     container.style.width = "100%";
     container.style.height = "100vh";
-    container.style.background = "white";
+    container.style.background = "red";
     document.body.appendChild(container);
   }
-
-  const graph = new Graph();
-  
-  graph.addNode("1", { label: profile.display_name, x: 0, y: 0, size: 10, color: "blue" });
-  graph.addNode("2", { label: "Node 2", x: 1, y: 1, size: 20, color: "red" });
-  graph.addEdge("1", "2", { size: 5, color: "purple" });
-  
-  const sigmaInstance = new Sigma(graph, document.getElementById("sigma-container"));
 }
 
 //Spotifty API functions
