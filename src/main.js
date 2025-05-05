@@ -18,6 +18,7 @@ async function mainHandler() {
   const savedToken = localStorage.getItem('spotify_token');
   if(savedToken){
     const profile = await fetchProfile(savedToken);
+    mainCode(profile);
   }
   else{
     const params = new URLSearchParams(window.location.search);
@@ -27,9 +28,9 @@ async function mainHandler() {
       const accessToken = await getAccessToken(clientId, code);
       localStorage.setItem("spotify_token", accessToken); // Store the access token for later use
       const profile = await fetchProfile(accessToken);
+      mainCode(profile);
     }
   }
-  mainCode(profile);
 }
 
 async function mainCode(profile) {
