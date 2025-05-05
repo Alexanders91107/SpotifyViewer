@@ -6,13 +6,8 @@ if (window.location.pathname === '/') {
 
 if (window.location.pathname === '/index') {
   const code = undefined;
-
-  if (!code) {redirectToAuthCodeFlow(clientId);} 
-  else {
-      const accessToken = await getAccessToken(clientId, code);
-      const profile = await fetchProfile(accessToken);
-      console.log("index: " + profile); // Profile data logs to console
-  }
+  if (!code) redirectToAuthCodeFlow(clientId);
+  else getProfile(code);
 }
 
 if (window.location.pathname === '/main') {
@@ -29,6 +24,12 @@ if (window.location.pathname === '/main') {
   } else {
     console.error('No token found in URL');
   }
+}
+
+async function getProfile(code) {
+    const accessToken = await getAccessToken(clientId, code);
+    const profile = await fetchProfile(accessToken);
+    console.log("index: " + profile); // Profile data logs to console
 }
 
 export async function redirectToAuthCodeFlow(clientId) {
