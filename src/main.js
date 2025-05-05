@@ -5,9 +5,7 @@ import Sigma from "sigma";
 
 const clientId = "77456fd240024ae29f080233a70335b0";
 //for load up and spotify auth --------------------
-if (window.location.pathname === '/') window.history.replaceState(null, '', '/index');
-if (window.location.pathname === '/index') redirectToAuthCodeFlow(clientId);
-//for main page -----------------------------------
+if (window.location.pathname === '/') window.history.replaceState(null, '', '/main');
 if (window.location.pathname === '/main') mainHandler();
 
 
