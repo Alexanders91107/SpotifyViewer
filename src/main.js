@@ -19,12 +19,15 @@ if (window.location.pathname === '/main') {
 
   if (code){
     localStorage.setItem('spotify_code', code);
+    console.log("Code received: ", code);
     main(code);
   }
   else{
     const savedCode = localStorage.getItem('spotify_code');
     if(savedCode) main(savedCode);
-    else console.error('Main: No code found in URL');
+    else{
+      console.log("No code found, redirecting to auth flow.");
+    }
   }
 }
 //for main page -----------------------------------
