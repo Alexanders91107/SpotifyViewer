@@ -7,7 +7,7 @@ if (window.location.pathname === '/') {
 if (window.location.pathname === '/index') {
   const code = undefined;
   if (!code) redirectToAuthCodeFlow(clientId);
-  else getProfile(code);
+  else getProfileIndex(code);
 }
 
 if (window.location.pathname === '/main') {
@@ -16,17 +16,17 @@ if (window.location.pathname === '/main') {
   const token = params.get('access_token');
   
   if (token) {
-    // Store the token for later use
-    localStorage.setItem('spotify_token', token);
-
-    const profile = await fetchProfile(token);
-    console.log("main: " + profile); // Profile data logs to console
-  } else {
-    console.error('No token found in URL');
-  }
+    localStorage.setItem('spotify_token', token); // Store the token for later use
+    getProfileMain(token);
+  } else console.error('Main: No token found in URL');
 }
 
-async function getProfile(code) {
+async function getProfileMain(token) {
+  const profile = await fetchProfile(token);
+  console.log("main: " + profile); // Profile data logs to console
+}
+
+async function getProfileIndex(code) {
     const accessToken = await getAccessToken(clientId, code);
     const profile = await fetchProfile(accessToken);
     console.log("index: " + profile); // Profile data logs to console
