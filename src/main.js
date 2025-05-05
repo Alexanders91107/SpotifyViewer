@@ -3,14 +3,12 @@
 const clientId = "77456fd240024ae29f080233a70335b0"; // Replace with your client ID
 
 //for load up and spotify auth --------------------
-if (window.location.pathname === '/') {
-  window.history.replaceState(null, '', '/index');
-}
+if (window.location.pathname === '/') window.history.replaceState(null, '', '/index');
 
 if (window.location.pathname === '/index') {
   const code = undefined;
   if (!code) redirectToAuthCodeFlow(clientId);
-  else getProfileIndex(code);
+  else index(code);
 }
 //for load up and spotify auth --------------------
 
@@ -19,8 +17,15 @@ if (window.location.pathname === '/main') {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
 
-  if (code) getProfileMain(code);
-  else console.error('Main: No code found in URL');
+  if (code){
+    localStorage.setItem('spotify_code', code);
+    main(code);
+  }
+  else{
+    const savedCode = localStorage.getItem('spotify_code');
+    if(savedCode) main(savedCode);
+    else console.error('Main: No code found in URL');
+  }
 }
 //for main page -----------------------------------
 
@@ -34,13 +39,13 @@ if (window.location.pathname === '/main') {
 
 //Async functions to handle top level await
 
-async function getProfileMain(code) {
+async function main(code) {
   const accessToken = await getAccessToken(clientId, code);
   const profile = await fetchProfile(accessToken);
   console.log("main: ", profile);
 }
 
-async function getProfileIndex(code) {
+async function index(code) {
     const accessToken = await getAccessToken(clientId, code);
     const profile = await fetchProfile(accessToken);
     console.log("index: " + profile); // Profile data logs to console
