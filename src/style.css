@@ -7,12 +7,14 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #081d08;
   background: linear-gradient(45deg, #081d08, #111111);
-  box-sizing: border-box;
+  /*box-sizing: border-box;*/
 }
 
+/*
 *, *::before, *::after {
   box-sizing: inherit;
 }
+*/
 
 body{
   height: 98vh;
@@ -34,7 +36,6 @@ body{
 }
 
 .navbar-title-container {
-  margin-top: 5px;
   display: flex;
   align-items: left;
   font-size: 1.5rem;
