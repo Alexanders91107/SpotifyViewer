@@ -27,7 +27,6 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
   background-color: #1b2e1b;
   background: linear-gradient(45deg, #102a10, rgb(11, 59, 30));
   border-radius: 8px;
