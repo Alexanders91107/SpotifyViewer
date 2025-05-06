@@ -61,8 +61,8 @@ body{
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  /* align-items: center; */ /* Let content align naturally or set specific alignment */
-  /* justify-content: center; */ /* Let content flow naturally */
+  align-items: center;
+  justify-content: center; 
 
   /* Flexbox properties for growth and minimum size */
   flex-grow: 1; /* Allow the item to grow to fill available space */
@@ -88,6 +88,6 @@ body{
   font-weight: 500;
   color: #ffffff;
   margin-bottom: 10px;
-  margin-top: -5px;
-  align-content: center;
+  align-items: center;
+  justify-content: center; 
 }
