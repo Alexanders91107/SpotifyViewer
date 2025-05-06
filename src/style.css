@@ -35,7 +35,6 @@ body{
 
 .navbar-title-container {
   margin-top: 5px;
-  margin-bottom: 5px;
   display: flex;
   align-items: left;
   font-size: 1.5rem;
@@ -45,7 +44,8 @@ body{
 
 .content-container {
   height: calc(95vh - 60px);
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   /* justify-items: flex; */ /* Remove this, it's for Grid */
   display: flex; /* Make this a flex container */
   flex-wrap: wrap; /* Allow items to wrap to the next line */
