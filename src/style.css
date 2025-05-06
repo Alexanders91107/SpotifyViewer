@@ -52,6 +52,16 @@ body{
   align-items: flex-start; /* Align items to the start of the cross axis */
   gap: 15px; /* Add space between the subcontainers */
   overflow-y: auto; /* Add scroll if content overflows vertically */
+
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for WebKit browsers */
+.content-container::-webkit-scrollbar {
+  display: none;
 }
 
 .content-subcontainer {
