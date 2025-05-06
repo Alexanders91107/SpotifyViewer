@@ -46,7 +46,7 @@ body{
 }
 
 .content-container {
-  height: calc(98vh - 20px - 60px - 10px);
+  height: calc(98vh);
   margin-top: 10px;
   padding-bottom: 5px;
   /* justify-items: flex; */ /* Remove this, it's for Grid */
