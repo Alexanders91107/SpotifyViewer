@@ -65,7 +65,7 @@ body{
   flex-basis: 360px; /* Set the initial/minimum size before growing */
   /* width: 360px; */ /* Remove fixed width */
 
-  height: 90vh; /* Optional: Keep a minimum height */
+  max-height: 90vh; /* Optional: Keep a minimum height */
   padding: 20px;
   background-color: #1b2e1b;
   border-radius: 8px;
