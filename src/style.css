@@ -100,3 +100,12 @@ body{
   align-items: center; /* Add this for vertical centering */
   justify-content: center; /* Add this for horizontal centering */
 }
+
+.profile-image{
+  width: 100px;
+  height: 100px;
+  border: rgba(13, 30, 20, 0.8) solid 4px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
