@@ -95,17 +95,18 @@ body{
   font-size: 1.2rem;
   font-weight: 500;
   color: #ffffff;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   display: flex; /* Add this */
   align-items: center; /* Add this for vertical centering */
   justify-content: center; /* Add this for horizontal centering */
 }
 
 .profile-image{
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   border: rgba(13, 30, 20, 0.8) solid 4px;
   border-radius: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  align-self: center;
 }
