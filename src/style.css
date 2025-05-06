@@ -22,6 +22,8 @@ body{
 
 .navbar-container {
   height: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -57,6 +59,8 @@ body{
   display: flex;
   flex-direction: column;
   margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   /* align-items: center; */ /* Let content align naturally or set specific alignment */
   /* justify-content: center; */ /* Let content flow naturally */
 
@@ -65,8 +69,8 @@ body{
   flex-basis: 360px; /* Set the initial/minimum size before growing */
   /* width: 360px; */ /* Remove fixed width */
 
-  min-height: 90vh;
-  max-height: 90vh;
+  min-height: 50vh;
+  max-height: 50vh;
   padding: 20px;
   background-color: #1b2e1b;
   border-radius: 8px;
