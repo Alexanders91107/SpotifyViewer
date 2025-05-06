@@ -7,14 +7,12 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #081d08;
   background: linear-gradient(45deg, #081d08, #111111);
-  /*box-sizing: border-box;*/
+  box-sizing: border-box;
 }
 
-/*
 *, *::before, *::after {
   box-sizing: inherit;
 }
-*/
 
 body{
   height: 98vh;
@@ -68,8 +66,8 @@ body{
   flex-basis: 360px; /* Set the initial/minimum size before growing */
   /* width: 360px; */ /* Remove fixed width */
 
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 85vh;
+  max-height: 85vh;
   padding: 20px;
   background-color: #1b2e1b;
   background: linear-gradient(45deg, #0d220d, rgb(12, 66, 34));
