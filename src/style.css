@@ -110,3 +110,19 @@ body{
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   align-self: center;
 }
+
+.user-name {
+  width: 250px;
+  height: 50px;
+  background-color:rgba(13, 30, 20, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  align-self: center;
+  margin-bottom: 20px;
+  display: flex; /* Add this */
+  align-items: center; /* Add this for vertical centering */
+  justify-content: center; /* Add this for horizontal centering */
+}
