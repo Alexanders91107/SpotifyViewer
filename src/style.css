@@ -104,7 +104,7 @@ body{
 .profile-image{
   width: 250px;
   height: 250px;
-  border: rgba(13, 30, 20) solid 4px;
+  border: rgba(13, 30, 20) solid 7px;
   border-radius: 8px;
   margin-bottom: 20px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);

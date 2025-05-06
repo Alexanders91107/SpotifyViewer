@@ -57,7 +57,7 @@ function displayProfile(profile) {
   // TODO: Update HTML elements with profile.display_name, profile.images[0]?.url, profile.followers.total
   document.getElementById('displayName').textContent = profile.display_name;
   document.getElementById('profileImage').src = profile.images[0]?.url || 'default-image.png';
-  // Example: document.getElementById('followerCount').textContent = profile.followers.total;
+  document.getElementById('followerCount').textContent = profile.followers.total;
 }
 
 function displayTopTracks(term, tracks) {
