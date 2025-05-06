@@ -55,7 +55,7 @@ async function mainCode(profile) {
 function displayProfile(profile) {
   console.log("Displaying profile:", profile);
   // TODO: Update HTML elements with profile.display_name, profile.images[0]?.url, profile.followers.total
-  // Example: document.getElementById('displayName').textContent = profile.display_name;
+  document.getElementById('displayName').textContent = profile.display_name;
   document.getElementById('profileImage').src = profile.images[0]?.url || 'default-placeholder.png';
   // Example: document.getElementById('followerCount').textContent = profile.followers.total;
 }
