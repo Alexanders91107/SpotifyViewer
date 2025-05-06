@@ -61,8 +61,6 @@ body{
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
-  align-items: center;
-  justify-content: center; 
 
   /* Flexbox properties for growth and minimum size */
   flex-grow: 1; /* Allow the item to grow to fill available space */
@@ -80,7 +78,7 @@ body{
 
 .card-title{
   width: 100%;
-  height: 60px;
+  height: 80px;
   background-color:rgba(13, 30, 20);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   border-radius: 8px;
@@ -88,6 +86,7 @@ body{
   font-weight: 500;
   color: #ffffff;
   margin-bottom: 10px;
-  align-items: center;
-  justify-content: center; 
+  display: flex; /* Add this */
+  align-items: center; /* Add this for vertical centering */
+  justify-content: center; /* Add this for horizontal centering */
 }
