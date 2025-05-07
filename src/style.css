@@ -159,7 +159,8 @@ body{
   background-color:rgba(13, 30, 20, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   border-radius: 8px;
-
+  padding: -5px 0;
+  
   /* Hide scrollbar for Firefox */
   scrollbar-width: none;
   /* Hide scrollbar for Firefox */
@@ -186,8 +187,5 @@ body{
 #medium_term_tracks_list,
 #long_term_tracks_list {
   list-style-type: none; /* Remove the default bullet points */
-  padding-top: -5px;
-  padding-bottom:-5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
 }
