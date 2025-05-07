@@ -175,4 +175,6 @@ body{
 #medium_term_tracks_list,
 #long_term_tracks_list {
   list-style-type: none; /* Remove the default bullet points */
+  padding: 0;
+  margin: 0;
 }
