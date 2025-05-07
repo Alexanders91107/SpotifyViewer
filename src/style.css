@@ -146,13 +146,14 @@ body{
   justify-content: center; /* Add this for horizontal centering */
 }
 
-.list-container{
+.list-container {
   width: 100%;
-  height: 500px;
-  bottom: 10px;
+  flex-grow: 1; /* Allow the list-container to grow and fill the remaining space */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Align items at the top of the container */
   overflow-y: auto; /* Add scroll if content overflows vertically */
+  margin-top: 10px; /* Add spacing below the card-title */
+  margin-bottom: 10px; /* Add spacing above the bottom of the content-subcontainer */
 }
