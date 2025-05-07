@@ -159,7 +159,7 @@ body{
   background-color:rgba(13, 30, 20, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   border-radius: 8px;
-  padding: -5px 0;
+  padding: 5px 0;
 
   /* Hide scrollbar for Firefox */
   scrollbar-width: none;
