@@ -154,7 +154,7 @@ body{
   align-items: center;
   justify-content: flex-start; /* Align items at the top of the container */
   overflow-y: auto; /* Add scroll if content overflows vertically */
-  margin-top: 10px; /* Add spacing below the card-title */
+  margin-top: 20px; /* Add spacing below the card-title */
   margin-bottom: 10px; /* Add spacing above the bottom of the content-subcontainer */
   background-color:rgba(13, 30, 20, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
