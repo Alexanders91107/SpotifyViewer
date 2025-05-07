@@ -95,10 +95,13 @@ body{
   font-size: 1.2rem;
   font-weight: 500;
   color: #ffffff;
-  margin-bottom: 100px;
   display: flex; /* Add this */
   align-items: center; /* Add this for vertical centering */
   justify-content: center; /* Add this for horizontal centering */
+}
+
+#user-profile-card-title{
+  margin-bottom: 100px;
 }
 
 .profile-image{
