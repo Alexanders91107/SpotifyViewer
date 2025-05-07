@@ -159,7 +159,18 @@ body{
   background-color:rgba(13, 30, 20, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   border-radius: 8px;
+
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
 }
+
+/* Hide scrollbar for WebKit browsers */
+.list-container::-webkit-scrollbar {
+  display: none;
+}
+
 
 .list-item {
   padding: 10px;
