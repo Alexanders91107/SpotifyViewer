@@ -170,3 +170,9 @@ body{
   font-size: 1rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+
+#short_term_tracks_list,
+#medium_term_tracks_list,
+#long_term_tracks_list {
+  list-style-type: none; /* Remove the default bullet points */
+}
