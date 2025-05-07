@@ -28,6 +28,7 @@ async function reAuth(){
 
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
+
   if (!code) redirectToAuthCodeFlow(clientId);
   else{
     const accessToken = await getAccessToken(clientId, code);
@@ -61,7 +62,7 @@ function displayProfile(profile) {
     document.getElementById('followerCount').textContent = profile.followers.total + " followers!";
   }
   else{
-    reAuth(); // If profile is invalid, re-authenticate
+    redirectToAuthCodeFlow(clientId) // If profile is invalid, re-authenticate
   }
 }
 
