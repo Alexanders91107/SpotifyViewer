@@ -55,9 +55,14 @@ async function mainCode(profile) {
 function displayProfile(profile) {
   console.log("Displaying profile:", profile);
   // TODO: Update HTML elements with profile.display_name, profile.images[0]?.url, profile.followers.total
-  document.getElementById('displayName').textContent = (profile.display_name) ? profile.display_name : 'Invalid Token:(';
-  document.getElementById('profileImage').src = profile.images[0]?.url || 'default-image.png';
-  document.getElementById('followerCount').textContent = profile.followers.total + " followers!";
+  if(profile.display_name){
+    document.getElementById('displayName').textContent = (profile.display_name) ? profile.display_name : 'Invalid Token:(';
+    document.getElementById('profileImage').src = profile.images[0]?.url || 'default-image.png';
+    document.getElementById('followerCount').textContent = profile.followers.total + " followers!";
+  }
+  else{
+    reAuth(); // If profile is invalid, re-authenticate
+  }
 }
 
 function displayTopTracks(term, tracks) {
