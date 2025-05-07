@@ -64,6 +64,14 @@ function displayTopTracks(term, tracks) {
   console.log(`Displaying ${term} tracks:`, tracks);
   // TODO: Update HTML elements for the specific term (e.g., 'short_term_tracks_list')
   // Loop through tracks.items and create list items or table rows
+  for (let i = 0; i < tracks.items.length; i++) {
+    const track = tracks.items[i];
+    const trackItem = document.createElement('li');
+    trackItem.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
+    
+    // Append the track item to the appropriate list based on the term
+    document.getElementById(`${term}_tracks_list`).appendChild(trackItem);
+  }
 }
 
 //Spotifty API functions
