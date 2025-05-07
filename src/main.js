@@ -74,7 +74,8 @@ function displayTopTracks(term, tracks) {
     const track = tracks.items[i];
     const trackItem = document.createElement('li');
     trackItem.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
-    
+    trackItem.classList.add('list-item'); // Add the "list-item" class to the list item
+
     // Append the track item to the appropriate list based on the term
     document.getElementById(`${term}_tracks_list`).appendChild(trackItem);
   }
