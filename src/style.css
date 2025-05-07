@@ -164,16 +164,17 @@ body{
 .list-item {
   padding: 10px;
   margin: 5px 0;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 5px;
   color: #ffffff;
   font-size: 1rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 #short_term_tracks_list,
 #medium_term_tracks_list,
 #long_term_tracks_list {
   list-style-type: none; /* Remove the default bullet points */
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
