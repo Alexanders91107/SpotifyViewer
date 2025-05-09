@@ -197,7 +197,6 @@ body{
 
 .track-info {
   flex-grow: 1; /* Allow text to take remaining space */
-  white-space: nowrap; /* Prevent text from wrapping to new line */
   overflow: hidden; /* Hide overflowing text */
   text-overflow: ellipsis; /* Add ellipsis (...) for overflowing text */
 }
