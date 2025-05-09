@@ -66,20 +66,49 @@ function displayProfile(profile) {
   }
 }
 
+// ...existing code...
 function displayTopTracks(term, tracks) {
   console.log(`Displaying ${term} tracks:`, tracks);
-  // TODO: Update HTML elements for the specific term (e.g., 'short_term_tracks_list')
-  // Loop through tracks.items and create list items or table rows
-  for (let i = 0; i < tracks.items.length; i++) {
-    const track = tracks.items[i];
-    const trackItem = document.createElement('li');
-    trackItem.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
-    trackItem.classList.add('list-item'); // Add the "list-item" class to the list item
+  const trackListElement = document.getElementById(`${term}_tracks_list`);
+  if (!trackListElement) {
+    console.error(`Element with ID ${term}_tracks_list not found.`);
+    return;
+  }
+  // Clear previous items
+  trackListElement.innerHTML = '';
 
-    // Append the track item to the appropriate list based on the term
-    document.getElementById(`${term}_tracks_list`).appendChild(trackItem);
+  if (tracks && tracks.items) {
+    for (let i = 0; i < tracks.items.length; i++) {
+      const track = tracks.items[i];
+      const trackItem = document.createElement('li');
+      trackItem.classList.add('list-item');
+
+      // Create image element for album cover
+      const albumCoverImg = document.createElement('img');
+      albumCoverImg.classList.add('album-cover');
+      // Use a smaller image if available (images[2] is often 64x64, images[0] is largest)
+      albumCoverImg.src = track.album.images[2]?.url || track.album.images[0]?.url || 'src/default-image.png'; // Fallback to a default
+      albumCoverImg.alt = track.album.name; // Alt text for accessibility
+
+      // Create a div for track information (name and artist)
+      const trackInfoDiv = document.createElement('div');
+      trackInfoDiv.classList.add('track-info');
+      trackInfoDiv.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
+
+      // Append album cover and track info to the list item
+      trackItem.appendChild(albumCoverImg);
+      trackItem.appendChild(trackInfoDiv);
+
+      trackListElement.appendChild(trackItem);
+    }
+  } else {
+    const noTracksItem = document.createElement('li');
+    noTracksItem.textContent = 'No tracks available for this period.';
+    noTracksItem.classList.add('list-item-empty');
+    trackListElement.appendChild(noTracksItem);
   }
 }
+// ...existing code...
 
 //Spotifty API functions
 

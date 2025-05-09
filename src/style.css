@@ -174,19 +174,47 @@ body{
 
 
 .list-item {
-  padding: 10px;
+  display: flex; /* Arrange image and text side-by-side */
+  align-items: center; /* Vertically align items in the center */
+  padding: 8px 10px; /* Adjusted padding */
   margin: 5px 0;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly more transparent */
   border-radius: 5px;
   color: #ffffff;
-  font-size: 1rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  font-size: 0.9rem; /* Slightly smaller font for track info */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
+  overflow: hidden; /* Ensure content doesn't spill */
+}
+
+.album-cover {
+  width: 40px; /* Size of the album cover */
+  height: 40px;
+  margin-right: 10px; /* Space between image and text */
+  border-radius: 3px; /* Slightly rounded corners for the image */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.track-info {
+  flex-grow: 1; /* Allow text to take remaining space */
+  white-space: nowrap; /* Prevent text from wrapping to new line */
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for overflowing text */
+}
+
+.list-item-empty {
+  padding: 10px;
+  margin: 5px 0;
+  color: #aaaaaa;
+  text-align: center;
+  font-style: italic;
 }
 
 #short_term_tracks_list,
 #medium_term_tracks_list,
 #long_term_tracks_list {
   list-style-type: none; /* Remove the default bullet points */
-  padding: 0 10px;
+  padding: 0 10px; /* Keep padding for the ul itself */
   margin: 0px;
+  width: 100%; /* Ensure ul takes full width of its container */
 }
