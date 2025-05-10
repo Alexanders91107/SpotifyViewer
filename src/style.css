@@ -114,11 +114,11 @@ body{
   align-items: center; /* Add this for vertical centering */
   justify-content: flex-start;
   gap: 5px;
-  padding: 0 10px; /* Add some padding for spacing */
+  padding: 10px; /* Add some padding for spacing */
 }
 
-#avg-pop,
-#avg-len{
+.avg-pop,
+.avg-len{
   font-size: 0.9rem;
   font-weight: 400;
   color: #cccccc;
