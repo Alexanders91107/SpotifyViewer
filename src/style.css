@@ -113,6 +113,7 @@ body{
   display: flex; /* Add this */
   align-items: center; /* Add this for vertical centering */
   justify-content: flex-start;
+  gap: 5px;
   padding: 0 10px; /* Add some padding for spacing */
 }
 
