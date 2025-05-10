@@ -222,7 +222,6 @@ body{
   flex-grow: 1; /* Allows track-info to take up available space */
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; /* Keep track name and artist on one line */
   margin-right: 10px; /* Add some space before the stats */
 }
 
