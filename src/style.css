@@ -119,6 +119,12 @@ body{
 .stats-text {
   width: 50%; /* Each span takes up half of the parent's content width */
   text-align: center; /* Center the text within each span */
+  padding: 8px 10px; /* Adjusted padding */
+  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly more transparent */
+  border-radius: 5px;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
 }
 
 #user-profile-card-title{
