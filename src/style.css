@@ -106,12 +106,13 @@ body{
   background-color:rgba(13, 30, 20, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   border-radius: 8px;
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 400;
   color: #ffffff;
   display: flex; /* Add this */
   align-items: center; /* Add this for vertical centering */
-  justify-content: center; /* Add this for horizontal centering */
+  justify-content: space-between;
+  padding: 0 10px; /* Add some padding for spacing */
 }
 
 #user-profile-card-title{
