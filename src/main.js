@@ -101,12 +101,12 @@ function displayTopTracks(term, tracks) {
       durationSpan.classList.add('track-duration');
       durationSpan.textContent = formatDuration(track.duration_ms);
 
-      const popularitySpan = document.createElement('span');
-      popularitySpan.classList.add('track-popularity');
-      popularitySpan.textContent = `Pop: ${track.popularity}`;
+      //const popularitySpan = document.createElement('span');
+      //popularitySpan.classList.add('track-popularity');
+      //popularitySpan.textContent = `Pop: ${track.popularity}`;
 
       trackStatsDiv.appendChild(durationSpan);
-      trackStatsDiv.appendChild(popularitySpan);
+      //trackStatsDiv.appendChild(popularitySpan);
 
       // Append elements to the list item
       trackItem.appendChild(albumCoverImg);
