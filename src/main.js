@@ -66,6 +66,62 @@ function displayProfile(profile) {
   }
 }
 
+function displayAvgStats(term, tracks){
+  console.log(`Displaying ${term} stats:`, tracks);
+  const avgLenElement = document.getElementById(`${term}_avg_len`);
+  const avgPopElement = document.getElementById(`${term}_avg_pop`);
+
+  if (!avgLenElement || !avgPopElement) {
+    console.error(`Element with ID ${term}_avg_len or ${term}_avg_pop not found.`);
+    return;
+  }
+
+  // Clear previous items
+  avgLenElement.innerHTML = '';
+  avgPopElement.innerHTML = '';
+
+  if (tracks && tracks.items && tracks.items.length > 0) {
+    const totalDuration = tracks.items.reduce((acc, track) => acc + track.duration_ms, 0);
+    const avgDuration = totalDuration / tracks.items.length;
+    const avgPopularity = Math.round(tracks.items.reduce((acc, track) => acc + track.popularity, 0) / tracks.items.length);
+    avgLenElement.appendChild(avgDuration);
+    avgPopElement.appendChild(avgPopularity);
+  }
+
+  /*
+  console.log(`Displaying ${term} stats:`, tracks);
+  const avgStatsElement = document.getElementById(`${term}_avg_stats`);
+  if (!avgStatsElement) {
+    console.error(`Element with ID ${term}_avg_stats not found.`);
+    return;
+  }
+  // Clear previous items
+  avgStatsElement.innerHTML = '';
+
+  if (tracks && tracks.items && tracks.items.length > 0) {
+    const totalDuration = tracks.items.reduce((acc, track) => acc + track.duration_ms, 0);
+    const avgDuration = totalDuration / tracks.items.length;
+    const avgPopularity = Math.round(tracks.items.reduce((acc, track) => acc + track.popularity, 0) / tracks.items.length);
+
+    const avgDurationSpan = document.createElement('span');
+    avgDurationSpan.classList.add('avg-duration');
+    avgDurationSpan.textContent = `Avg Duration: ${formatDuration(avgDuration)}`;
+
+    const avgPopularitySpan = document.createElement('span');
+    avgPopularitySpan.classList.add('avg-popularity');
+    avgPopularitySpan.textContent = `Avg Popularity: ${avgPopularity}`;
+
+    avgStatsElement.appendChild(avgDurationSpan);
+    avgStatsElement.appendChild(avgPopularitySpan);
+  } else {
+    const noTracksItem = document.createElement('li');
+    noTracksItem.textContent = 'No tracks available for this period.';
+    noTracksItem.classList.add('list-item-empty');
+    avgStatsElement.appendChild(noTracksItem);
+  }
+    */
+}
+
 function displayTopTracks(term, tracks) {
   console.log(`Displaying ${term} tracks:`, tracks);
   const trackListElement = document.getElementById(`${term}_tracks_list`);
@@ -114,6 +170,8 @@ function displayTopTracks(term, tracks) {
       trackItem.appendChild(trackStatsDiv); // Add stats to the right
 
       trackListElement.appendChild(trackItem);
+
+      displayAvgStats(term, tracks); // Call function to display average stats
     }
   } else {
     const noTracksItem = document.createElement('li');
