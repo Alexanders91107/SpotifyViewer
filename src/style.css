@@ -217,3 +217,27 @@ body{
   margin: 0px;
   width: 100%; /* Ensure ul takes full width of its container */
 }
+
+.track-info {
+  flex-grow: 1; /* Allows track-info to take up available space */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Keep track name and artist on one line */
+  margin-right: 10px; /* Add some space before the stats */
+}
+
+.track-stats {
+  display: flex;
+  flex-direction: column; /* Stack duration and popularity vertically */
+  align-items: flex-end; /* Align text to the right */
+  font-size: 0.8rem; /* Smaller font for stats */
+  color: #b0b0b0; /* Lighter color for stats */
+  flex-shrink: 0; /* Prevent stats from shrinking */
+  min-width: 60px; /* Give it a minimum width to prevent squishing */
+  text-align: right;
+}
+
+.track-duration,
+.track-popularity {
+  line-height: 1.3; /* Adjust line height for stacked stats */
+}

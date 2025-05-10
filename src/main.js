@@ -66,7 +66,6 @@ function displayProfile(profile) {
   }
 }
 
-// ...existing code...
 function displayTopTracks(term, tracks) {
   console.log(`Displaying ${term} tracks:`, tracks);
   const trackListElement = document.getElementById(`${term}_tracks_list`);
@@ -77,7 +76,7 @@ function displayTopTracks(term, tracks) {
   // Clear previous items
   trackListElement.innerHTML = '';
 
-  if (tracks && tracks.items) {
+  if (tracks && tracks.items && tracks.items.length > 0) {
     for (let i = 0; i < tracks.items.length; i++) {
       const track = tracks.items[i];
       const trackItem = document.createElement('li');
@@ -86,18 +85,33 @@ function displayTopTracks(term, tracks) {
       // Create image element for album cover
       const albumCoverImg = document.createElement('img');
       albumCoverImg.classList.add('album-cover');
-      // Use a smaller image if available (images[2] is often 64x64, images[0] is largest)
-      albumCoverImg.src = track.album.images[2]?.url || track.album.images[0]?.url || 'src/default-image.png'; // Fallback to a default
-      albumCoverImg.alt = track.album.name; // Alt text for accessibility
+      albumCoverImg.src = track.album.images[2]?.url || track.album.images[0]?.url || 'src/default-image.png';
+      albumCoverImg.alt = track.album.name;
 
       // Create a div for track information (name and artist)
       const trackInfoDiv = document.createElement('div');
       trackInfoDiv.classList.add('track-info');
       trackInfoDiv.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
 
-      // Append album cover and track info to the list item
+      // Create a div for track stats (duration and popularity)
+      const trackStatsDiv = document.createElement('div');
+      trackStatsDiv.classList.add('track-stats');
+
+      const durationSpan = document.createElement('span');
+      durationSpan.classList.add('track-duration');
+      durationSpan.textContent = formatDuration(track.duration_ms);
+
+      const popularitySpan = document.createElement('span');
+      popularitySpan.classList.add('track-popularity');
+      popularitySpan.textContent = `Pop: ${track.popularity}`;
+
+      trackStatsDiv.appendChild(durationSpan);
+      trackStatsDiv.appendChild(popularitySpan);
+
+      // Append elements to the list item
       trackItem.appendChild(albumCoverImg);
       trackItem.appendChild(trackInfoDiv);
+      trackItem.appendChild(trackStatsDiv); // Add stats to the right
 
       trackListElement.appendChild(trackItem);
     }
@@ -108,7 +122,13 @@ function displayTopTracks(term, tracks) {
     trackListElement.appendChild(noTracksItem);
   }
 }
-// ...existing code...
+
+function formatDuration(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
 
 //Spotifty API functions
 
