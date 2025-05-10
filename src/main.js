@@ -84,8 +84,8 @@ function displayAvgStats(term, tracks){
     const totalDuration = tracks.items.reduce((acc, track) => acc + track.duration_ms, 0);
     const avgDuration = totalDuration / tracks.items.length;
     const avgPopularity = Math.round(tracks.items.reduce((acc, track) => acc + track.popularity, 0) / tracks.items.length);
-    avgLenElement.appendChild(avgDuration);
-    avgPopElement.appendChild(avgPopularity);
+    avgLenElement.textContent = formatDuration(avgDuration);
+    avgPopElement.textContent = avgPopularity;
   }
 
   /*
