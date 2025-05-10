@@ -170,8 +170,6 @@ function displayTopTracks(term, tracks) {
       trackItem.appendChild(trackStatsDiv); // Add stats to the right
 
       trackListElement.appendChild(trackItem);
-
-      displayAvgStats(term, tracks); // Call function to display average stats
     }
   } else {
     const noTracksItem = document.createElement('li');
@@ -179,6 +177,8 @@ function displayTopTracks(term, tracks) {
     noTracksItem.classList.add('list-item-empty');
     trackListElement.appendChild(noTracksItem);
   }
+
+  displayAvgStats(term, tracks); // Call function to display average stats
 }
 
 function formatDuration(ms) {
