@@ -104,6 +104,8 @@ function displayTopAlbums(term, tracks) {
   console.log(`Displaying ${term} albums:`, tracks);
   clearAvgStats(term); // Clear average stats when displaying albums
 
+  const trackListElement = document.getElementById(`${term}_tracks_list`);
+
   // Clear previous items
   trackListElement.innerHTML = '';
 
@@ -119,6 +121,8 @@ function displayTopAlbums(term, tracks) {
 function displayTopArtists(term, artists) {
   console.log(`Displaying ${term} artists:`, artists);
   clearAvgStats(term); // Clear average stats when displaying albums
+
+  const trackListElement = document.getElementById(`${term}_tracks_list`);
 
   // Clear previous items
   trackListElement.innerHTML = '';
