@@ -15,7 +15,7 @@ async function mainHandler() {
   const savedToken = localStorage.getItem('spotify_token');
   if(savedToken){
     const profile = await fetchProfile(savedToken);
-    const topTracksShort = await fetchTopTracks(localStorage.getItem('spotify_token'), 'short_term');
+    const topTracksShort = await fetchTop(localStorage.getItem('spotify_token'), 'short_term', 'tracks');
     if(profile.error || topTracksShort.error) reAuth();
     else mainCode(profile);
   }
@@ -43,14 +43,16 @@ async function mainCode(profile) {
   displayProfile(profile); // Call function to update profile section in HTML
 
   // Fetch top tracks for different time ranges
-  const topTracksShort = await fetchTopTracks(localStorage.getItem('spotify_token'), 'short_term');
+  const topTracksShort = await fetchTop(localStorage.getItem('spotify_token'), 'short_term', 'tracks');
   displayTopTracks('short_term', topTracksShort); // Call function to display short term tracks
 
-  const topTracksMedium = await fetchTopTracks(localStorage.getItem('spotify_token'), 'medium_term');
+  const topTracksMedium = await fetchTop(localStorage.getItem('spotify_token'), 'medium_term', 'tracks');
   displayTopTracks('medium_term', topTracksMedium); // Call function to display medium term tracks
 
-  const topTracksLong = await fetchTopTracks(localStorage.getItem('spotify_token'), 'long_term');
+  const topTracksLong = await fetchTop(localStorage.getItem('spotify_token'), 'long_term', 'tracks');
   displayTopTracks('long_term', topTracksLong); // Call function to display long term tracks
+
+  setupTermNavigation(); // Add this call
 }
 
 function displayProfile(profile) {
@@ -64,6 +66,70 @@ function displayProfile(profile) {
   else{
     redirectToAuthCodeFlow(clientId) // If profile is invalid, re-authenticate
   }
+}
+
+function setupTermNavigation() {
+  const terms = ['short_term', 'medium_term', 'long_term'];
+  const token = localStorage.getItem('spotify_token');
+
+  terms.forEach(term => {
+    const songButton = document.getElementById(`${term}_song_button`);
+    const albumButton = document.getElementById(`${term}_album_button`);
+    const artistButton = document.getElementById(`${term}_artist_button`);
+
+    if (songButton) {
+      songButton.addEventListener('click', async () => {
+        const tracks = await fetchTop(token, term, 'tracks');
+        displayTopTracks(term, tracks);
+      });
+    }
+
+    if (albumButton) {
+      albumButton.addEventListener('click', async () => {
+        const tracks = await fetchTop(token, term, 'tracks'); // Albums are derived from tracks
+        displayTopAlbums(term, tracks);
+      });
+    }
+
+    if (artistButton) {
+      artistButton.addEventListener('click', async () => {
+        const artists = await fetchTop(token, term, 'artists');
+        displayTopArtists(term, artists);
+      });
+    }
+  });
+}
+
+function displayTopAlbums(term, tracks) {
+  console.log(`Displaying ${term} albums:`, tracks);
+  clearAvgStats(term); // Clear average stats when displaying albums
+
+  // Clear previous items
+  trackListElement.innerHTML = '';
+
+  const songButton = document.getElementById(`${term}_song_button`);
+  const artistButton = document.getElementById(`${term}_artist_button`);
+  const albumButton = document.getElementById(`${term}_album_button`);
+
+  songButton.classList = 'nav-button';
+  artistButton.classList = 'nav-button';  
+  albumButton.classList = 'nav-button-active';
+}
+
+function displayTopArtists(term, artists) {
+  console.log(`Displaying ${term} artists:`, artists);
+  clearAvgStats(term); // Clear average stats when displaying albums
+
+  // Clear previous items
+  trackListElement.innerHTML = '';
+
+  const songButton = document.getElementById(`${term}_song_button`);
+  const artistButton = document.getElementById(`${term}_artist_button`);
+  const albumButton = document.getElementById(`${term}_album_button`);
+
+  songButton.classList = 'nav-button';
+  artistButton.classList = 'nav-button-active';  
+  albumButton.classList = 'nav-button';
 }
 
 function displayTopTracks(term, tracks) {
@@ -159,6 +225,14 @@ function displayAvgStats(term, tracks){
   }
 }
 
+// Function to clear/hide average stats when not displaying tracks
+function clearAvgStats(term) {
+  const avgLenElement = document.getElementById(`${term}_avg_len`);
+  const avgPopElement = document.getElementById(`${term}_avg_pop`);
+  if (avgLenElement) avgLenElement.textContent = '-';
+  if (avgPopElement) avgPopElement.textContent = '-';
+}
+
 // Helper function to format duration in mm:ss
 function formatDuration(ms) {
   const totalSeconds = Math.floor(ms / 1000);
@@ -178,24 +252,24 @@ Spotifty API functions Spotifty API functions Spotifty API functions Spotifty AP
 */
 //Spotifty API functions
 
-async function fetchTopTracks(token, timeRange) {
+async function fetchTop(token, timeRange, type) {
   // timeRange can be 'short_term', 'medium_term', or 'long_term'
   const limit = 50;
   try {
     // Construct the URL for fetching top tracks
-    const result = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`, {
+    const result = await fetch(`https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=${limit}`, {
         method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
     if (!result.ok) {
-      console.error(`Error fetching top tracks (${timeRange}): ${result.status} ${result.statusText}`);
+      console.error(`Error fetching top ${type} (${timeRange}): ${result.status} ${result.statusText}`);
       const errorBody = await result.text();
       console.error("Spotify API response body:", errorBody);
-      return { error: { status: result.status, message: `Error fetching top tracks (${timeRange})` } };
+      return { error: { status: result.status, message: `Error fetching top ${type} (${timeRange})` } };
     }
     return await result.json(); // Returns object like { items: [...] }
   } catch (err) {
-    console.error(`Network error fetching top tracks (${timeRange}):`, err);
+    console.error(`Network error fetching top ${type} (${timeRange}):`, err);
     return { error: { status: 0, message: `Network error fetching top tracks (${timeRange})` } };
   }
 }
