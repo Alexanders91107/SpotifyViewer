@@ -134,6 +134,54 @@ function displayTopArtists(term, artists) {
   songButton.classList = 'nav-button';
   artistButton.classList = 'nav-button-active';  
   albumButton.classList = 'nav-button';
+
+  if (artists && artists.items && artists.items.length > 0) {
+    for (let i = 0; i < artists.items.length; i++) {
+      const artist = artists.items[i];
+      const trackItem = document.createElement('li');
+      trackItem.classList.add('list-item');
+
+
+
+      // Create image element for album cover
+      const albumCoverImg = document.createElement('img');
+      albumCoverImg.classList.add('album-cover');
+      albumCoverImg.src = artist.images[2]?.url || track.images[0]?.url || 'src/default-image.png';
+      albumCoverImg.alt = artist.name;
+
+
+
+      // Create a div for track information (name and artist)
+      const trackInfoDiv = document.createElement('div');
+      trackInfoDiv.classList.add('track-info');
+      trackInfoDiv.textContent = `${artist.name}`;
+
+
+
+      // Create a div for track stats (duration and popularity)
+      const trackStatsDiv = document.createElement('div');
+      trackStatsDiv.classList.add('track-stats');
+
+      const durationSpan = document.createElement('span');
+      durationSpan.classList.add('track-duration');
+      durationSpan.textContent = artist.popularity;
+
+      trackStatsDiv.appendChild(durationSpan);
+
+
+
+      // Append elements to the list item
+      trackItem.appendChild(albumCoverImg);
+      trackItem.appendChild(trackInfoDiv);
+      trackItem.appendChild(trackStatsDiv); // Add stats to the right
+      trackListElement.appendChild(trackItem);
+    }
+  } else {
+    const noTracksItem = document.createElement('li');
+    noTracksItem.textContent = 'No tracks available for this period.';
+    noTracksItem.classList.add('list-item-empty');
+    trackListElement.appendChild(noTracksItem);
+  }
 }
 
 function displayTopTracks(term, tracks) {
