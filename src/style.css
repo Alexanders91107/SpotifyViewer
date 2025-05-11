@@ -309,7 +309,19 @@ body{
   background-color: rgba(255, 255, 255, 0.2); /* Darker on hover */
   cursor: pointer; /* Change cursor to pointer on hover */
 }
-.nav-button:active {
-  background-color: rgba(255, 255, 255, 0.3); /* Darker on active */
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5); /* Inset shadow on active */
+
+.nav-button-active {
+  width: 50%; /* Each span takes up half of the parent's content width */
+  text-align: center; /* Center the text within each span */
+  padding: 4px 10px; /* Adjusted padding */
+  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0.3); /* Slightly more transparent */
+  border-radius: 5px;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
+}
+
+.nav-button-active:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* Darker on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
