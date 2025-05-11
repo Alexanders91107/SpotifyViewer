@@ -276,12 +276,14 @@ function displayAvgStats(term, list, type){
   avgPopElement.innerHTML = '';
 
   if (list && list.items && list.items.length > 0) {
+    avgLenElement.textContent = '-';
     if(type == 'track'){
       const totalDuration = list.items.reduce((acc, track) => acc + track.duration_ms, 0);
       const avgDuration = totalDuration / list.items.length;
+      avgLenElement.textContent = formatDuration(avgDuration)
     }
+    
     const avgPopularity = Math.round(list.items.reduce((acc, curr) => acc + curr.popularity, 0) / list.items.length);
-    avgLenElement.textContent = (type == 'track') ? formatDuration(avgDuration) : '-';
     avgPopElement.textContent = avgPopularity;
   }
 }
