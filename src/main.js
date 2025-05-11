@@ -102,7 +102,7 @@ function setupTermNavigation() {
 
 function displayTopAlbums(term, tracks) {
   console.log(`Displaying ${term} albums:`, tracks);
-  clearAvgStats(term); // Clear average stats when displaying albums
+  displayAvgStats(term, tracks, "album"); // Call function to display average stats
 
   const trackListElement = document.getElementById(`${term}_tracks_list`);
 
@@ -120,7 +120,6 @@ function displayTopAlbums(term, tracks) {
 
 function displayTopArtists(term, artists) {
   console.log(`Displaying ${term} artists:`, artists);
-  clearAvgStats(term); // Clear average stats when displaying albums
 
   const trackListElement = document.getElementById(`${term}_tracks_list`);
 
@@ -182,6 +181,8 @@ function displayTopArtists(term, artists) {
     noTracksItem.classList.add('list-item-empty');
     trackListElement.appendChild(noTracksItem);
   }
+
+  displayAvgStats(term, artists, "artist"); // Call function to display average stats
 }
 
 function displayTopTracks(term, tracks) {
@@ -250,14 +251,20 @@ function displayTopTracks(term, tracks) {
     trackListElement.appendChild(noTracksItem);
   }
 
-  displayAvgStats(term, tracks); // Call function to display average stats
+  displayAvgStats(term, tracks, "track"); // Call function to display average stats
 }
 
 // Function to display average stats for a given time range
-function displayAvgStats(term, tracks){
-  console.log(`Displaying ${term} stats:`, tracks);
+function displayAvgStats(term, list, type){
+  console.log(`Displaying ${term} stats:`, list);
   const avgLenElement = document.getElementById(`${term}_avg_len`);
   const avgPopElement = document.getElementById(`${term}_avg_pop`);
+
+  if(type == 'album'){
+    if (avgLenElement) avgLenElement.textContent = '-';
+    if (avgPopElement) avgPopElement.textContent = '-';
+    return;
+  }
 
   if (!avgLenElement || !avgPopElement) {
     console.error(`Element with ID ${term}_avg_len or ${term}_avg_pop not found.`);
@@ -268,21 +275,15 @@ function displayAvgStats(term, tracks){
   avgLenElement.innerHTML = '';
   avgPopElement.innerHTML = '';
 
-  if (tracks && tracks.items && tracks.items.length > 0) {
-    const totalDuration = tracks.items.reduce((acc, track) => acc + track.duration_ms, 0);
-    const avgDuration = totalDuration / tracks.items.length;
-    const avgPopularity = Math.round(tracks.items.reduce((acc, track) => acc + track.popularity, 0) / tracks.items.length);
-    avgLenElement.textContent = formatDuration(avgDuration);
+  if (list && list.items && list.items.length > 0) {
+    if(type == 'track'){
+      const totalDuration = list.items.reduce((acc, track) => acc + track.duration_ms, 0);
+      const avgDuration = totalDuration / list.items.length;
+    }
+    const avgPopularity = Math.round(list.items.reduce((acc, curr) => acc + curr.popularity, 0) / list.items.length);
+    avgLenElement.textContent = (type == 'track') ? formatDuration(avgDuration) : '-';
     avgPopElement.textContent = avgPopularity;
   }
-}
-
-// Function to clear/hide average stats when not displaying tracks
-function clearAvgStats(term) {
-  const avgLenElement = document.getElementById(`${term}_avg_len`);
-  const avgPopElement = document.getElementById(`${term}_avg_pop`);
-  if (avgLenElement) avgLenElement.textContent = '-';
-  if (avgPopElement) avgPopElement.textContent = '-';
 }
 
 // Helper function to format duration in mm:ss
