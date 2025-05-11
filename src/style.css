@@ -279,8 +279,8 @@ body{
 .nav-container{
   width: 100%;
   margin-top: 20px; /* Add spacing below the card-title */
-  min-height: 40px;
-  max-height: 40px;
+  min-height: 45px;
+  max-height: 45px;
   background-color:rgba(13, 30, 20, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
   border-radius: 8px;
@@ -297,10 +297,19 @@ body{
 .nav-button {
   width: 50%; /* Each span takes up half of the parent's content width */
   text-align: center; /* Center the text within each span */
-  padding: 8px 10px; /* Adjusted padding */
+  padding: 4px 10px; /* Adjusted padding */
   margin: 5px 0;
   background-color: rgba(255, 255, 255, 0.1); /* Slightly more transparent */
   border-radius: 5px;
   color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
+}
+
+.nav-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Darker on hover */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+.nav-button:active {
+  background-color: rgba(255, 255, 255, 0.3); /* Darker on active */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5); /* Inset shadow on active */
 }
