@@ -275,3 +275,31 @@ body{
 .track-popularity {
   line-height: 1.3; /* Adjust line height for stacked stats */
 }
+
+.nav-container{
+  width: 100%;
+  min-height: 40px;
+  max-height: 40px;
+  background-color:rgba(13, 30, 20, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 450;
+  color: #ffffff;
+  display: flex; /* Add this */
+  align-items: center; /* Add this for vertical centering */
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 10px; /* Add some padding for spacing */
+}
+
+.nav-button {
+  width: 50%; /* Each span takes up half of the parent's content width */
+  text-align: center; /* Center the text within each span */
+  padding: 8px 10px; /* Adjusted padding */
+  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly more transparent */
+  border-radius: 5px;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Adjusted shadow */
+}

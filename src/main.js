@@ -44,13 +44,13 @@ async function mainCode(profile) {
 
   // Fetch top tracks for different time ranges
   const topTracksShort = await fetchTopTracks(localStorage.getItem('spotify_token'), 'short_term');
-  const topTracksMedium = await fetchTopTracks(localStorage.getItem('spotify_token'), 'medium_term');
-  const topTracksLong = await fetchTopTracks(localStorage.getItem('spotify_token'), 'long_term');
-
   displayTopTracks('short_term', topTracksShort); // Call function to display short term tracks
-  displayTopTracks('medium_term', topTracksMedium); // Call function to display medium term tracks
-  displayTopTracks('long_term', topTracksLong); // Call function to display long term tracks
 
+  const topTracksMedium = await fetchTopTracks(localStorage.getItem('spotify_token'), 'medium_term');
+  displayTopTracks('medium_term', topTracksMedium); // Call function to display medium term tracks
+
+  const topTracksLong = await fetchTopTracks(localStorage.getItem('spotify_token'), 'long_term');
+  displayTopTracks('long_term', topTracksLong); // Call function to display long term tracks
 }
 
 function displayProfile(profile) {
@@ -66,6 +66,68 @@ function displayProfile(profile) {
   }
 }
 
+function displayTopTracks(term, tracks) {
+  console.log(`Displaying ${term} tracks:`, tracks);
+  const trackListElement = document.getElementById(`${term}_tracks_list`);
+  if (!trackListElement) {
+    console.error(`Element with ID ${term}_tracks_list not found.`);
+    return;
+  }
+  // Clear previous items
+  trackListElement.innerHTML = '';
+
+  if (tracks && tracks.items && tracks.items.length > 0) {
+    for (let i = 0; i < tracks.items.length; i++) {
+      const track = tracks.items[i];
+      const trackItem = document.createElement('li');
+      trackItem.classList.add('list-item');
+
+
+
+      // Create image element for album cover
+      const albumCoverImg = document.createElement('img');
+      albumCoverImg.classList.add('album-cover');
+      albumCoverImg.src = track.album.images[2]?.url || track.album.images[0]?.url || 'src/default-image.png';
+      albumCoverImg.alt = track.album.name;
+
+
+
+      // Create a div for track information (name and artist)
+      const trackInfoDiv = document.createElement('div');
+      trackInfoDiv.classList.add('track-info');
+      trackInfoDiv.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
+
+
+
+      // Create a div for track stats (duration and popularity)
+      const trackStatsDiv = document.createElement('div');
+      trackStatsDiv.classList.add('track-stats');
+
+      const durationSpan = document.createElement('span');
+      durationSpan.classList.add('track-duration');
+      durationSpan.textContent = formatDuration(track.duration_ms);
+
+      trackStatsDiv.appendChild(durationSpan);
+
+
+
+      // Append elements to the list item
+      trackItem.appendChild(albumCoverImg);
+      trackItem.appendChild(trackInfoDiv);
+      trackItem.appendChild(trackStatsDiv); // Add stats to the right
+      trackListElement.appendChild(trackItem);
+    }
+  } else {
+    const noTracksItem = document.createElement('li');
+    noTracksItem.textContent = 'No tracks available for this period.';
+    noTracksItem.classList.add('list-item-empty');
+    trackListElement.appendChild(noTracksItem);
+  }
+
+  displayAvgStats(term, tracks); // Call function to display average stats
+}
+
+// Function to display average stats for a given time range
 function displayAvgStats(term, tracks){
   console.log(`Displaying ${term} stats:`, tracks);
   const avgLenElement = document.getElementById(`${term}_avg_len`);
@@ -87,100 +149,9 @@ function displayAvgStats(term, tracks){
     avgLenElement.textContent = formatDuration(avgDuration);
     avgPopElement.textContent = avgPopularity;
   }
-
-  /*
-  console.log(`Displaying ${term} stats:`, tracks);
-  const avgStatsElement = document.getElementById(`${term}_avg_stats`);
-  if (!avgStatsElement) {
-    console.error(`Element with ID ${term}_avg_stats not found.`);
-    return;
-  }
-  // Clear previous items
-  avgStatsElement.innerHTML = '';
-
-  if (tracks && tracks.items && tracks.items.length > 0) {
-    const totalDuration = tracks.items.reduce((acc, track) => acc + track.duration_ms, 0);
-    const avgDuration = totalDuration / tracks.items.length;
-    const avgPopularity = Math.round(tracks.items.reduce((acc, track) => acc + track.popularity, 0) / tracks.items.length);
-
-    const avgDurationSpan = document.createElement('span');
-    avgDurationSpan.classList.add('avg-duration');
-    avgDurationSpan.textContent = `Avg Duration: ${formatDuration(avgDuration)}`;
-
-    const avgPopularitySpan = document.createElement('span');
-    avgPopularitySpan.classList.add('avg-popularity');
-    avgPopularitySpan.textContent = `Avg Popularity: ${avgPopularity}`;
-
-    avgStatsElement.appendChild(avgDurationSpan);
-    avgStatsElement.appendChild(avgPopularitySpan);
-  } else {
-    const noTracksItem = document.createElement('li');
-    noTracksItem.textContent = 'No tracks available for this period.';
-    noTracksItem.classList.add('list-item-empty');
-    avgStatsElement.appendChild(noTracksItem);
-  }
-    */
 }
 
-function displayTopTracks(term, tracks) {
-  console.log(`Displaying ${term} tracks:`, tracks);
-  const trackListElement = document.getElementById(`${term}_tracks_list`);
-  if (!trackListElement) {
-    console.error(`Element with ID ${term}_tracks_list not found.`);
-    return;
-  }
-  // Clear previous items
-  trackListElement.innerHTML = '';
-
-  if (tracks && tracks.items && tracks.items.length > 0) {
-    for (let i = 0; i < tracks.items.length; i++) {
-      const track = tracks.items[i];
-      const trackItem = document.createElement('li');
-      trackItem.classList.add('list-item');
-
-      // Create image element for album cover
-      const albumCoverImg = document.createElement('img');
-      albumCoverImg.classList.add('album-cover');
-      albumCoverImg.src = track.album.images[2]?.url || track.album.images[0]?.url || 'src/default-image.png';
-      albumCoverImg.alt = track.album.name;
-
-      // Create a div for track information (name and artist)
-      const trackInfoDiv = document.createElement('div');
-      trackInfoDiv.classList.add('track-info');
-      trackInfoDiv.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
-
-      // Create a div for track stats (duration and popularity)
-      const trackStatsDiv = document.createElement('div');
-      trackStatsDiv.classList.add('track-stats');
-
-      const durationSpan = document.createElement('span');
-      durationSpan.classList.add('track-duration');
-      durationSpan.textContent = formatDuration(track.duration_ms);
-
-      //const popularitySpan = document.createElement('span');
-      //popularitySpan.classList.add('track-popularity');
-      //popularitySpan.textContent = `Pop: ${track.popularity}`;
-
-      trackStatsDiv.appendChild(durationSpan);
-      //trackStatsDiv.appendChild(popularitySpan);
-
-      // Append elements to the list item
-      trackItem.appendChild(albumCoverImg);
-      trackItem.appendChild(trackInfoDiv);
-      trackItem.appendChild(trackStatsDiv); // Add stats to the right
-
-      trackListElement.appendChild(trackItem);
-    }
-  } else {
-    const noTracksItem = document.createElement('li');
-    noTracksItem.textContent = 'No tracks available for this period.';
-    noTracksItem.classList.add('list-item-empty');
-    trackListElement.appendChild(noTracksItem);
-  }
-
-  displayAvgStats(term, tracks); // Call function to display average stats
-}
-
+// Helper function to format duration in mm:ss
 function formatDuration(ms) {
   const totalSeconds = Math.floor(ms / 1000);
   const minutes = Math.floor(totalSeconds / 60);
@@ -188,6 +159,15 @@ function formatDuration(ms) {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
+/*
+
+Spotifty API functions Spotifty API functions Spotifty API functions Spotifty API functions
+Spotifty API functions Spotifty API functions Spotifty API functions Spotifty API functions
+Spotifty API functions Spotifty API functions Spotifty API functions Spotifty API functions
+Spotifty API functions Spotifty API functions Spotifty API functions Spotifty API functions
+Spotifty API functions Spotifty API functions Spotifty API functions Spotifty API functions
+
+*/
 //Spotifty API functions
 
 async function fetchTopTracks(token, timeRange) {
