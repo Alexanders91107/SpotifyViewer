@@ -76,6 +76,14 @@ function displayTopTracks(term, tracks) {
   // Clear previous items
   trackListElement.innerHTML = '';
 
+  const songButton = document.getElementById(`${term}_song_button`);
+  const artistButton = document.getElementById(`${term}_artist_button`);
+  const albumButton = document.getElementById(`${term}_album_button`);
+
+  songButton.classList = 'nav-button-active';
+  artistButton.classList = 'nav-button';  
+  albumButton.classList = 'nav-button';
+
   if (tracks && tracks.items && tracks.items.length > 0) {
     for (let i = 0; i < tracks.items.length; i++) {
       const track = tracks.items[i];
