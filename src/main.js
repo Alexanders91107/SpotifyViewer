@@ -260,12 +260,6 @@ function displayAvgStats(term, list, type){
   const avgLenElement = document.getElementById(`${term}_avg_len`);
   const avgPopElement = document.getElementById(`${term}_avg_pop`);
 
-  if(type == 'album'){
-    if (avgLenElement) avgLenElement.textContent = '-';
-    if (avgPopElement) avgPopElement.textContent = '-';
-    return;
-  }
-
   if (!avgLenElement || !avgPopElement) {
     console.error(`Element with ID ${term}_avg_len or ${term}_avg_pop not found.`);
     return;
@@ -282,7 +276,7 @@ function displayAvgStats(term, list, type){
       const avgDuration = totalDuration / list.items.length;
       avgLenElement.textContent = formatDuration(avgDuration)
     }
-    
+
     const avgPopularity = Math.round(list.items.reduce((acc, curr) => acc + curr.popularity, 0) / list.items.length);
     avgPopElement.textContent = avgPopularity;
   }
