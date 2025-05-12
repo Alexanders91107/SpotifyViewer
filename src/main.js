@@ -116,16 +116,16 @@ function displayTopAlbums(term, tracks) {
   artistButton.classList = 'nav-button';  
   albumButton.classList = 'nav-button-active';
 
-  if (tracksData && tracksData.items && tracksData.items.length > 0) {
+  if (tracks && tracks.items && tracks.items.length > 0) {
     const uniqueAlbums = new Map();
     const albumIds = new Set();
-    
-    tracksData.items.forEach(track => {
+
+    tracks.items.forEach(track => {
       if (!albumIds.has(track.album)) {
-        uniqueAlbums.set(track.album, 50 - tracksData.items.indexOf(track));
+        uniqueAlbums.set(track.album, 50 - tracks.items.indexOf(track));
         albumIds.add(track.album.id);
       }else{
-        uniqueAlbums.set(track.album, uniqueAlbums.get(track.album) + 50 - tracksData.items.indexOf(track));
+        uniqueAlbums.set(track.album, uniqueAlbums.get(track.album) + 50 - tracks.items.indexOf(track));
       }
     });
 
