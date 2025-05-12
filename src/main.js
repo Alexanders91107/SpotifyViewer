@@ -121,19 +121,21 @@ function displayTopAlbums(term, tracks) {
     const albumIds = new Set();
     const albumMap = new Map();
 
-    tracks.items.forEach(track => {
-      if (!albumIds.has(track.album.id)) {
-        uniqueAlbums.set(track.album.id, 50 - tracks.items.indexOf(track));
-        albumIds.add(track.album.id);
-        albumMap.set(track.album.id, track.album);
+    for(let i = 0; i < tracks.items.length; i++){
+      const track = tracks.items[i];
+      const id = track.album.id;
+      if (!albumIds.has(id)) {
+        uniqueAlbums.set(id, 50 - i);
+        albumIds.add(id);
+        albumMap.set(id, track.album);
       }else{
-        uniqueAlbums.set(track.album.id, uniqueAlbums.get(track.album.id) + 50 - tracks.items.indexOf(track));
+        uniqueAlbums.set(id, uniqueAlbums.get(id) + 50 - i);
       }
-    });
+    }
 
     const sortedAlbumIds = Array.from(uniqueAlbums.keys()).sort((a, b) => uniqueAlbums.get(b) - uniqueAlbums.get(a));
     const sortedAlbums = sortedAlbumIds.map(id => albumMap.get(id));
-    
+
     for (let i = 0; i < sortedAlbums.length; i++) {
       const album = sortedAlbums[i];
       const trackItem = document.createElement('li');
