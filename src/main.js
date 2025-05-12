@@ -159,11 +159,9 @@ function displayTopAlbums(term, tracks) {
 
       const durationSpan = document.createElement('span');
       durationSpan.classList.add('track-duration');
-      durationSpan.textContent = (album.popularity) ? album.popularity : '-';
+      durationSpan.textContent = '-';
 
       trackStatsDiv.appendChild(durationSpan);
-
-
 
       // Append elements to the list item
       trackItem.appendChild(albumCoverImg);
@@ -322,6 +320,12 @@ function displayAvgStats(term, list, type){
   console.log(`Displaying ${term} stats:`, list);
   const avgLenElement = document.getElementById(`${term}_avg_len`);
   const avgPopElement = document.getElementById(`${term}_avg_pop`);
+
+  if(type == 'album'){
+    avgLenElement.textContent = '-';
+    avgPopElement.textContent = '-';
+    return;
+  }
 
   if (!avgLenElement || !avgPopElement) {
     console.error(`Element with ID ${term}_avg_len or ${term}_avg_pop not found.`);
