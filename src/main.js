@@ -159,7 +159,7 @@ function displayTopAlbums(term, tracks) {
 
       const durationSpan = document.createElement('span');
       durationSpan.classList.add('track-duration');
-      durationSpan.textContent = album.popularity;
+      durationSpan.textContent = (album.popularity) ? album.popularity : '-';
 
       trackStatsDiv.appendChild(durationSpan);
 
